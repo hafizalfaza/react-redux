@@ -1,9 +1,9 @@
 import React from 'react';
 import map from 'lodash/map';
 import timezones from '../../data/timezones';
-import SignupForm from './SignupForm';
+import PropTypes from 'prop-types';
 
-class SignupPage extends React.Component{
+class SignupForm extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -15,6 +15,7 @@ class SignupPage extends React.Component{
 		}
 		
 		this.onChange = this.onChange.bind(this);
+		this.onSubmit = this.onSubmit.bind(this);
 	}
 	
 	
@@ -22,12 +23,17 @@ class SignupPage extends React.Component{
 		this.setState({[e.target.name]: e.target.value});
 	}
 	
+	onSubmit(e){
+		e.preventDefault();
+		this.props.userSignupRequest(this.state);
+	}
+	
 	render(){
 		const options = map(timezones, (key, val) =>
 			<option key={val} value={val}>{key}</option>
 		);
 		return (
-			<form>
+			<form onSubmit={this.onSubmit}>
 				<h1>Register Now!</h1>
 				<div className="form-group">
 					<label className="control-label">
@@ -105,4 +111,8 @@ class SignupPage extends React.Component{
 	}
 }
 
-export default SignupPage;
+SignupForm.propTypes = {
+	userSignupRequest: PropTypes.func.isRequired
+}
+
+export default SignupForm;
