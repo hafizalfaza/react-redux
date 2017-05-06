@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 import App from './components/App';
 import Dashboard from './components/Dashboard';
-import SignupPage from './components/SignupPage';
+import SignupPage from './components/signup/SignupPage';
 
 render(
 <Router>
